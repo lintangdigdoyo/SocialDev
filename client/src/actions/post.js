@@ -9,6 +9,7 @@ import {
   DELETE_POST,
   PROFILE_ERROR,
   ADD_COMMENT,
+  DELETE_COMMENT,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -113,6 +114,19 @@ export const addComment = (id, formData) => async (dispatch) => {
     if (errors) {
       errors.map((error) => setAlert(error.msg, 'danger'));
     }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/posts/${postId}/comment/${commentId}`);
+    dispatch({ type: DELETE_COMMENT, payload: commentId });
+    dispatch(setAlert('Comment Removed', 'success'));
+  } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
