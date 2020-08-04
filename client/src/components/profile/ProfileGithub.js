@@ -6,7 +6,7 @@ import { getUserRepos } from '../../actions/profile';
 const ProfileGithub = ({ username, getUserRepos, repos }) => {
   useEffect(() => {
     getUserRepos(username);
-  }, [getUserRepos]);
+  }, [getUserRepos, username]);
 
   return (
     <div className='profile-github'>

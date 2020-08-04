@@ -154,7 +154,7 @@ router.put('/:id/unlike', auth, async (req, res) => {
 });
 
 //@route POST api/posts/:id/comment
-//@desc Create a new post
+//@desc Create a new comment
 //@access Private
 
 router.post(
